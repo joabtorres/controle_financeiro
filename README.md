@@ -1,2 +1,2 @@
-# Controle_financeiro 
-É necessário cria um VIRTUAL HOST, para o projeto
+# Controle_financeiro v 1.0
+É necessário criar um VIRTUAL HOST, para o projeto.
