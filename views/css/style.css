@@ -1,0 +1,57 @@
+body{background: #f1f1f1;color: #337ab7; font-size:12pt;}
+a{color:white;}
+a:hover{color:white;text-decoration:none;}
+/* 
+	CLASSES GLOBAIS
+*/
+.float-left{float: left;}
+.float-right{float:right;}
+.img-center{display: block; margin: auto;}
+.text-block{display: block;}
+.clear{clear: both;}
+.danger{color: #e8a0a0;}
+.container{min-width: 980px!important;}
+/* 
+	login
+*/
+ .form{
+ 	padding: 20px 15px;
+ 	margin: 30px auto;
+ 	background: #545354;
+ 	color: white;
+ 	border-radius: 5px;
+ }
+ .form .bg-danger, .form .bg-success {padding: 10px;  color: black;}
+ .form .bg-danger{background: #e4acac;}
+ .form .bg-success{background: #d3f5c5;}
+ .form label{font-weight: 500;}
+
+ #header, aside{
+ 	background:#25377D;
+ 	color:white;
+ 	font-size: 12pt;
+ }
+ .foto-usuario{margin: 20px; border: 4px #ccc solid;}
+ #header p{
+	font-size: 14pt;
+	margin-top:20px;
+ }
+ 
+ #header p span{display: block;color:#FFFFFF;}
+ .sidebar{ 	padding:0;	}
+.menu ul li{padding: 5px; padding-left:10px;}
+.menu ul li a{display:block;}
+.menu ul li:hover{background: #337ab7;}
+
+.thumbnail{background:none; border: none;}
+.thumbnail{color: #337ab7;}
+.thumbnail:hover{color: #337ab7; text-decoration:none;}
+
+/* 
+	FOOTER
+*/
+ footer{
+ 	border-top: 2px rgba(0,0,0,.4) solid;
+ 	margin-top: 10px;
+ 	color:#222222;
+ }
