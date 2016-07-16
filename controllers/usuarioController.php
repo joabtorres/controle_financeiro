@@ -92,11 +92,24 @@
 					
 					$para = $user->getEmail();
 					$assunto = "NOVA SENHA - Controle Financeiro";
-					$mensagem = "Olá ".$user->getNome().",<br> Confira sua nova senha abaixo, é recomendado que altere depois. <br><br> <strong>Usuario: </strong>".$user->getEmail().'<br><strong>Senha: </strong>'.$senha."<br><br> Atenciosamente Controle Financeiro;";
-					$header = 'From: joabtorres@hotmail.com'."\r\n".
-								'X-Mailer: PHP/'.phpversion();
+					$mensagem = "<meta charset='UFT-8'> Olá ".$user->getNome().",<br> Confira sua nova senha abaixo, é recomendado que altere depois. <br><br> <strong>Usuario: </strong>".$user->getEmail().'<br><strong>Senha: </strong>'.$senha."<br><br> Atenciosamente Controle Financeiro;";
+					$mensagem = '
+					<html>
+					<head>
+					 <title>'.$assunto.'</title>
+					</head>
+					<body>
+					Olá '.$user->getNome().',<br> Confira sua nova senha abaixo, é recomendado que altere depois. <br><br> <strong>Usuario: </strong>'.$user->getEmail().'<br><strong>Senha: </strong>'.$senha.'<br><br> Atenciosamente Controle Financeiro;
+					</body>
+					</html>
+					';
+					
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					$headers .= 'From: Controle Financeiro <controlefinanceiro@endogenese.com.br>' . "\r\n";
+					$headers .= 'X-Mailer: PHP/'.phpversion();
 
-					mail($para, $assunto, $mensagem, $header);
+					mail($para, $assunto, $mensagem, $headers);
 					$msg = "<script>alert('Foi enviado uma nova senha para seu e-mail.'); location.href='/home';</script>";
 					echo $msg;
 				}else{
