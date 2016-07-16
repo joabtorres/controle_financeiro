@@ -20,16 +20,16 @@
 		<input type="text" name="tSobrenome" id="cSobrenome" class="form-control" value="<?php echo $user->getSobrenome(); ?>">
 	</div>
 	<div class="form-group col-xs-6">
-		<label for="cEmail">Email: * </label>
+		<label for="cEmail">Email: </label>
 		<input type="email" id="cEmail" class="form-control" value="<?php echo $user->getEmail() ?>" disabled="yes">
 		<input type="hidden" name="tEmail" value="<?php echo $user->getEmail() ?>"/>
 	</div>
 	<div class="form-group col-xs-6">
-		<label for="cSenha">Senha: * </label>
+		<label for="cSenha">Nova Senha:  </label>
 		<input type="password" name="tSenha" id="cSenha" class="form-control">
 	</div>
 	<div class="form-group col-xs-6">
-		<label for="cRepitSenha">Repetir senha: * </label>
+		<label for="cRepitSenha">Repetir nova senha: </label>
 		<input type="password" name="tRepitSenha" id="cRepitSenha" class="form-control">
 	</div>
 	<div>

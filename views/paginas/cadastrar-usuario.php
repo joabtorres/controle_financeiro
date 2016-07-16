@@ -16,11 +16,9 @@
 			<form method="POST" class="form">
 			<h2 class="text-center"><strong>Novo Usuário</strong></h2>
 			<p class="danger">* : Campo obrigatório</p>
-				<?php if(!empty($erro)){ ?>
+				<?php if(!empty($erro)): ?>
 							<p class="bg-danger"><?php echo $erro; ?></p>
-				<?php  }else if(!empty($msg)){?>
-						<p class="bg-success"><?php echo $msg; ?></p>
-				<?php }?>
+				<?php  endif; ?>
 				<div class="form-group">
 					<label for="cNome">Nome: * </label>
 					<input type="text" name="tNome" id="cNome" class="form-control" value="<?php echo $nome ?>">
