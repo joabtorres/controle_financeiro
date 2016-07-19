@@ -13,23 +13,23 @@
 					if(isset($_POST['tSobrenome']) && !empty($_POST['tSobrenome'])){
 						$usuario['sobrenome'] = ucwords(strtolower(addslashes($_POST['tSobrenome'])));								
 					}else{
-						$dados['erro'] = 'Preencha os campos obrigatórios';
+						$dados['erro'] = 'Preencha os campos Sobrenome';
 					}
 
 				}else{
-					$dados['erro'] = 'Preencha os campos obrigatórios';
+					$dados['erro'] = 'Preencha o campos Nome';
 				}
 
 			if(isset($_POST['tSenha']) && !empty($_POST['tSenha']) && 
-				isset($_POST['tRepitSenha']) && !empty($_POST['tRepitSenha']) &&
-				($_POST['tSenha'] == $_POST['tRepitSenha'])){
+				isset($_POST['tRepitSenha']) && !empty($_POST['tRepitSenha'])){
+				if($_POST['tSenha'] != $_POST['tRepitSenha']){
+					$dados['erro'] = 'Senha incorreta, por favor digite novamente';
+				} 
 				if(strlen($_POST['tSenha']) >= 6){
 					$usuario['senha'] = md5(addslashes($_POST['tSenha']));	
 				}else{
 					$dados['erro'] = 'A senha deve conter acima de 6 digitos';
 				}
-			}else{
-				$dados['erro'] = 'Senha incorreta, por favor digite novamente';
 			}	
 
 			//UPLOAD FOTO
@@ -68,7 +68,8 @@
 					}
 					
 					$user->seleciona(array('id'=> addslashes($_POST['tID'])));
-					if($user->getUrl_foto()){
+					$foto = $user->getUrl_foto()
+					if(!empty($foto)){
 						unlink($user->getUrl_foto());
 					}
 					$usuario['url_foto'] = $imagem['diretorio'];
@@ -78,7 +79,8 @@
 				}
 				
 			}	
-					// SE EXITE ERRO
+			
+			// SE EXITE ERRO
 			if(empty($dados['erro'])){
 				$user->salvar($usuario, addslashes($_POST['tID']));					
 				$msg = "<script>alert('Usuário Alterado com sucesso!'); location.href='/home';</script>";

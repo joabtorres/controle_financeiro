@@ -11,7 +11,7 @@
 					$currentAction = "index";
 				}
 			}else{
-				$currentController = "HomeController";
+				$currentController = "homeController";
 				$currentAction = "index";
 			}
 			

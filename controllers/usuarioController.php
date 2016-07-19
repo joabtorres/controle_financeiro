@@ -25,7 +25,6 @@
 		public function cadastrar(){		
 			
 			$validacao = array();
-			$this->loadView('cadastrar-usuario',$validacao);
 			if(isset($_POST['tCadastrar'])){
 				if(isset($_POST['tNome']) && !empty($_POST['tNome'])){
 					$usuario = array( 'nome' => ucwords(strtolower(addslashes($_POST['tNome']))));
@@ -42,28 +41,33 @@
 							if($user->numRows() > 0){
 								$validacao['erro'] = 'E-mail já cadastrado';
 							}else{
-								$usuario['email'] = strtolower(addslashes($_POST['tEmail']));
-								$validacao['email'] = $_POST['tEmail'];
-								if(isset($_POST['tSenha']) && !empty($_POST['tSenha']) && 
-									isset($_POST['tRepitSenha']) && !empty($_POST['tRepitSenha']) && ($_POST['tSenha'] == $_POST['tRepitSenha'])){
-									if(strlen($_POST['tSenha']) >= 6){
-										
-										$usuario['senha'] = md5(addslashes($_POST['tSenha']));
+								if($this->verificarEmail(strtolower($_POST['tEmail']))){
+									$usuario['email'] = strtolower(addslashes($_POST['tEmail']));
+									$validacao['email'] = $_POST['tEmail'];
+									if(isset($_POST['tSenha']) && !empty($_POST['tSenha']) && 
+										isset($_POST['tRepitSenha']) && !empty($_POST['tRepitSenha']) && ($_POST['tSenha'] == $_POST['tRepitSenha'])){
+										if(strlen($_POST['tSenha']) >= 6){
+											
+											$usuario['senha'] = md5(addslashes($_POST['tSenha']));
 
-										$new = new UsuarioModel();
-										$new->salvar($usuario);
-										$validacao = array();
+											$new = new UsuarioModel();
+											$new->salvar($usuario);
+											$validacao = array();
 
-										$msg = "<script>alert('Usuário cadastrado com sucesso!'); location.href='/home';</script>";
-										echo $msg;
+											$msg = "<script>alert('Usuário cadastrado com sucesso!'); location.href='/home';</script>";
+											echo $msg;
+										}else{
+											
+											$validacao['erro'] = 'A senha deve conter acima de 6 digitos';
+										}
 									}else{
 										
-										$validacao['erro'] = 'A senha deve conter acima de 6 digitos';
+										$validacao['erro'] = "Senha incorreta ou não informada";
 									}
 								}else{
-									
-									$validacao['erro'] = "Senha incorreta ou não informada";
+									$validacao['erro'] = "E-mail invalido";
 								}
+								
 							}	
 						}else{
 							
@@ -77,7 +81,7 @@
 					$validacao['erro'] = 'Preencha todos os campos';
 				}
 			}
-
+			$this->loadView('cadastrar-usuario',$validacao);
 		}
 		public function lembra_usuario(){
 			$validacao = array();
@@ -117,6 +121,19 @@
 				}
 			}
 			$this->loadView('lembra-usuario',$validacao);
+		}
+
+		private function verificarEmail($email){
+			if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+				list($usuario, $dominio) = explode("@", $email);
+				if(checkdnsrr($dominio, 'MX')){
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				return false;
+			}
 		}
 	}
 ?>

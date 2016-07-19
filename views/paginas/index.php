@@ -25,7 +25,7 @@
 			<header class="col-xs-12" id="header">
 				<section class="row">
 					<article class="col-xs-12">
-					<?php if(!empty($user->getUrl_foto())) : ?>
+					<?php $foto =$user->getUrl_foto(); if(!empty($foto)) : ?>
 					<img src="/<?php echo $user->getUrl_foto(); ?>" alt="Foto do Usuário" class="float-left foto-usuario">
 					<?php else: ?>
 					<img src="/views/imagens/usuario.jpg" alt="Foto do Usuário" class="float-left foto-usuario">

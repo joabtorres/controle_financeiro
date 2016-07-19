@@ -26,7 +26,30 @@
 			<td><?php echo number_format($value['valor'],2,",",".") ?></td>
 			<td class="text-center">
 				<a href="/investimento/editar/<?php echo $value['id']; ?>" class="btn btn-primary">Editar</a>
-				<a href="/investimento/deletar/<?php echo $value['id']; ?>" class="btn btn-primary">Excluir</a>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cExcluir<?php echo $value['id']; ?>">Excluir</button>
+
+				<div class="modal fade" id="cExcluir<?php echo $value['id']; ?>" tabindex='-1' role='dialog' aria-labelledby="MyModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<header class="modal-header">
+								<button type="button" class="close" data-dismiss='modal' aria-label="close"><span aria-hidden="true">&times;</span></button>
+								<h2 class="text-left" >Investimento</h2>
+							</header>
+							<section class="modal-body">
+								<p class="text-left">Deseja excluir este registro?<br>
+									<strong>
+									<?php echo $value['descricao'] ?> - 
+									R$ <?php echo number_format($value['valor'],2,",",".");?>
+									</strong>
+								</p>
+							</section>
+							<footer class="modal-footer">
+								<a href="/investimento/deletar/<?php echo $value['id']; ?>" class="btn btn-primary">Confirmar</a>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							</footer>
+						</div>
+					</div>
+				</div>
 			</td>
 		</tr>
 	<?php endforeach; endif; ?>
